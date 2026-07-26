@@ -1,6 +1,6 @@
 # FP-000 — Purpose of First Principles
 
-**Status:** Draft
+**Status:** Established
 
 ## Purpose
 

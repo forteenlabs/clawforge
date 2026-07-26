@@ -1,6 +1,6 @@
 # FP-001 — Deliberate Continuity
 
-**Status:** Draft
+**Status:** Established
 
 ## Principle
 

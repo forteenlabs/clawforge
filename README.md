@@ -9,15 +9,18 @@ The project is being developed deliberately: principles first, architecture seco
 ClawForge exists to preserve knowledge, improve reasoning, support responsible human decision-making, and create durable systems that can evolve across technologies, platforms, and generations.
 
 ## Current Status
-
+```
 **Current Build:** 0.0.3 — Blueprint  
-**Status:** Planned
+**Status:** Complete
+
+Build 0.0.3 established ClawForge's architectural identity, introduced the Foundation layer, established FP-000 and FP-001, and aligned governance and architecture beneath those principles.
 
 Build 0.0.2 established the project constitution, including architecture, principles, governance, longevity, contribution standards, and roadmap.
-
+```
 ## Project Structure
 
 - [`VISION.md`](VISION.md) — Why ClawForge exists
+- [`docs/foundation/`](docs/foundation/) — Enduring First Principles that define ClawForge's identity
 - [`BUILD_LOG.md`](BUILD_LOG.md) — Current status and build history
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — System architecture
 - [`docs/PRINCIPLES.md`](docs/PRINCIPLES.md) — Foundational principles
@@ -41,16 +44,21 @@ ClawForge follows a few core commitments:
 
 ## Current Direction
 
-Build 0.0.3 will define the blueprint for the first working application, including:
+Build 0.0.3 is complete.
 
-- project layout
-- module boundaries
-- interfaces
-- configuration
-- logging
-- development workflow
+The Foundation layer now defines ClawForge's enduring identity through its First Principles.
 
-No application code will be written until the blueprint is clear enough to guide it.
+The next build will evaluate the first reference implementation against that Foundation.
+
+The primary question is no longer:
+
+> "What should ClawForge become?"
+
+It is now:
+
+> "Which implementation most faithfully expresses the Foundation that has already been established?"
+
+Implementation details—including language, frameworks, repository structure, and runtime architecture—remain intentionally undecided until they can be evaluated against the Foundation.
 
 ## License
 
