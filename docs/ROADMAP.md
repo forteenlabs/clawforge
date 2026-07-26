@@ -189,3 +189,63 @@ Understanding matters more than velocity.
 Progress should be measured by quality, clarity, and usefulness—not simply by lines of code.
 
 Every completed build should leave ClawForge stronger, more understandable, and better prepared for the next generation of work.
+
+---
+
+## Build 0.0.3 — Blueprint
+
+**Status:** In Progress
+
+### Purpose
+
+Define the architecture of the first working ClawForge implementation before production code is written.
+
+### Current Progress
+
+- Blueprint document created.
+- Participant concept introduced.
+- Authority, operational responsibility, and accountability identified as distinct governance concepts.
+- Smallest meaningful executable discussed.
+- Provider independence established as a provisional architectural direction.
+- Governance and intelligence identified as complementary layers.
+- Python identified as a candidate first reference implementation.
+- Architectural evaluation framework established:
+  - Longevity Test
+  - Replaceability Test
+  - Identity Test
+  - Governance Test
+- Architecture Decision Record folder created.
+- Documentation and decision flow established.
+
+### Immediate Sequence
+
+1. Align repository process documents.
+2. Create ADR-0000 defining the Architecture Decision Record process.
+3. Create ADR-0001 recording ClawForge’s preservation of reasoning through architecture.
+4. Complete the evaluation of Python as the initial reference implementation.
+5. Record the language decision if accepted.
+6. Continue through the remaining Blueprint architectural questions.
+7. Update authoritative architecture only after corresponding decisions are accepted.
+8. Complete and commit Build 0.0.3 when its exit criteria are satisfied.
+
+### Current Architectural Questions
+
+1. What is the smallest executable that still deserves to be called ClawForge?
+   - Provisional decision reached.
+2. What characteristics must the initial implementation language have?
+   - Discussion in progress.
+3. Should Python serve as the initial reference implementation?
+   - Candidate direction identified.
+4. What repository and source structure should support the first executable?
+5. What module boundaries belong in the core?
+6. How should requests, responses, policies, providers, and execution records communicate?
+7. How should failure containment and recovery work?
+8. How should participant identity and permissions be represented?
+9. Where should memory, tools, agents, and additional interfaces connect?
+10. How should ClawForge be tested and developed?
+
+### Build Constraint
+
+Build 0.0.3 is documentation-first.
+
+Implementation code should not begin until the minimum executable architecture is sufficiently defined for another contributor to implement without guessing.

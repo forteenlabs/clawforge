@@ -119,3 +119,42 @@ Every contribution should leave ClawForge more understandable than it was before
 Future contributors should benefit from today's work.
 
 That is the standard.
+---
+
+## Decision and Documentation Flow
+
+Major changes should follow this sequence:
+
+1. Vision establishes why ClawForge exists.
+2. Principles establish how ClawForge approaches its work.
+3. The Blueprint records active questions, exploration, alternatives, and provisional decisions.
+4. Architecture Decision Records preserve accepted engineering decisions and their reasoning.
+5. Architecture documents describe what is currently true about the system.
+6. Implementation expresses the accepted architecture in code.
+7. Build logs preserve completed historical progress.
+
+The expected working flow is:
+
+```text
+Vision
+    |
+    v
+Principles
+    |
+    v
+Blueprint Discussion
+    |
+    v
+Provisional Decision
+    |
+    v
+Architecture Decision Record
+    |
+    v
+Authoritative Architecture
+    |
+    v
+Implementation
+    |
+    v
+Observation and Improvement

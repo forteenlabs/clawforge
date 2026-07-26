@@ -174,3 +174,72 @@ Does this increase understanding?
 Will it still matter five years from now?
 
 If the answer is "no," reconsider whether it belongs in ClawForge.
+---
+
+## Preservation of Reasoning
+
+ClawForge preserves reasoning before implementation.
+
+Important ideas should move through a visible and traceable process:
+
+1. Observe.
+2. Understand.
+3. Question.
+4. Discuss.
+5. Challenge.
+6. Decide.
+7. Record.
+8. Build.
+9. Observe again.
+
+Code preserves implementation.
+
+ClawForge documentation preserves why the implementation exists.
+
+Future contributors should be able to trace important system behavior from purpose, through reasoning and decisions, into architecture and code.
+
+---
+
+## Understandable Before Impressive
+
+ClawForge should be understandable before it is impressive.
+
+Its structure, terminology, decisions, and behavior should be explainable to:
+
+- human contributors
+- AI contributors
+- system operators
+- future maintainers
+- future ClawForge instances
+
+Complexity must be earned by demonstrated need.
+
+Cleverness must not replace clarity.
+
+---
+
+## Architectural Evaluation Tests
+
+Every major architectural decision should be evaluated using four tests.
+
+### Longevity Test
+
+Will this decision still make architectural sense if current technologies, vendors, models, or programming languages change?
+
+### Replaceability Test
+
+Can the affected component be replaced, supplemented, or removed without unnecessarily rebuilding ClawForge?
+
+### Identity Test
+
+If the component disappeared, would the remaining system still honestly be ClawForge?
+
+This test helps distinguish foundational identity from replaceable implementation.
+
+### Governance Test
+
+Does the decision preserve appropriate authority, operational responsibility, accountability, transparency, and control?
+
+Passing these tests does not guarantee that a decision is correct.
+
+The tests provide a consistent framework for examining the decision before it becomes permanent.
