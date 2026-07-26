@@ -6,16 +6,45 @@ This document describes the currently accepted architecture of ClawForge.
 
 It is an authoritative summary of the system's architecture rather than a discussion of alternatives.
 
-Architectural discussions belong in `BLUEPRINT.md`.
+Active architectural exploration belongs in `BLUEPRINT.md`.
 
-Permanent architectural decisions belong in the Architecture Decision Records (`docs/decisions/`).
+Enduring identity principles belong in `docs/foundation/`.
 
-Only architectural conclusions that have been accepted through an ADR should appear in this document.
+Permanent architectural decisions belong in the Architecture Decision Records under `docs/decisions/`.
+
+Only architectural conclusions supported by the Foundation and accepted through the appropriate governance process should appear in this document.
 
 ---
 
-## Current State
+## Architectural Hierarchy
 
-The architecture of ClawForge is defined through accepted Architecture Decision Records (ADRs).
+ClawForge is organized through the following relationship:
 
-At this stage of development, the architecture is intentionally minimal while foundational architectural decisions are being established.
+```text
+Vision
+    |
+    v
+Foundation
+    |
+    v
+Governance and Architectural Decisions
+    |
+    v
+Architecture
+    |
+    v
+Engineering
+    |
+    v
+Implementation
+    |
+    v
+Operation
+    |
+    v
+Observation
+    |
+    v
+Learning
+    |
+    +------> Foundation Review

@@ -1,17 +1,47 @@
-```markdown
 # ClawForge Architecture Decisions
 
-This document indexes ClawForge Architecture Decision Records.
+This document indexes ClawForge Architecture Decision Records (ADRs).
 
-Architecture Decision Records preserve important engineering decisions, the reasoning behind them, and their consequences.
+Architecture Decision Records preserve significant engineering decisions, the reasoning behind them, and the architectural consequences of those decisions.
 
-The rules governing Architecture Decision Records will be established by ADR-0000.
+ADRs derive from the ClawForge Foundation.
+
+They interpret and apply First Principles.
+
+They do not redefine them.
+
+The rules governing Architecture Decision Records are established by ADR-0000.
 
 ---
 
-## Accepted Decisions
+## Relationship to the Foundation
 
-None yet.
+Before proposing an ADR, contributors should determine whether the question has already been answered by an existing First Principle.
+
+The relationship is:
+
+```text
+Vision
+    │
+    ▼
+Foundation
+    │
+    ▼
+Architecture Decision Records
+    │
+    ▼
+Architecture
+    │
+    ▼
+Engineering
+    │
+    ▼
+Implementation
+```
+
+First Principles define enduring identity.
+
+Architecture Decision Records preserve significant architectural decisions made in service of that identity.
 
 ---
 
@@ -19,31 +49,34 @@ None yet.
 
 ### ADR-0000 — Architecture Decision Records
 
-Defines what a ClawForge Architecture Decision Record is, when one is required, how decisions are accepted, and how earlier decisions are superseded without rewriting history.
+Defines:
 
-Status: Accepted.
+- what an ADR is,
+- when an ADR is required,
+- how ADRs are accepted,
+- and how future ADRs supersede earlier architectural decisions without rewriting history.
+
+**Status:** Frozen
 
 ---
 
 ## Candidate Decisions
 
-### ADR-0001 — ClawForge Preserves Reasoning Through Architecture
+None.
 
-Records that ClawForge preserves important reasoning through a traceable progression from vision and principles to discussion, decisions, architecture, and implementation.
-
-Status: Provisional discussion completed. ADR not yet created.
+The original concepts explored for ADR-0001 matured into the Foundation layer represented by FP-000 and FP-001 rather than becoming an ADR.
 
 ---
 
-## Decisions Under Discussion
+## Active Architectural Discussions
 
 ### Initial Reference Implementation Language
 
-Python is currently being evaluated as ClawForge’s first reference implementation language.
+Python is currently being evaluated as ClawForge's first reference implementation language.
 
-Python would be an implementation choice rather than part of ClawForge’s identity.
+This is an implementation decision rather than an identity decision.
 
-Status: Discussion in progress.
+**Status:** Active Blueprint Discussion
 
 ---
 

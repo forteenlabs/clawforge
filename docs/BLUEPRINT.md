@@ -81,3 +81,63 @@ ClawForge Response
     +------> Participant
     |
     +------> Execution Record
+    ---
+
+# Foundation Alignment
+
+During Blueprint exploration, ClawForge reached an architectural realization:
+
+The project's identity could not be fully expressed through Architecture Decision Records alone.
+
+This resulted in the creation of the Foundation layer.
+
+The Foundation now consists of:
+
+- FP-000 — Purpose of First Principles
+- FP-001 — Deliberate Continuity
+
+These documents establish the enduring identity from which all future architectural decisions derive.
+
+---
+
+## Impact on the Blueprint
+
+The Blueprint no longer asks only:
+
+> "What should ClawForge build?"
+
+It must now also ask:
+
+> "Does this proposal faithfully express the Foundation?"
+
+Every implementation candidate should therefore be evaluated against the First Principles before it is evaluated against convenience, performance, or familiarity.
+
+---
+
+## Current Direction
+
+The governed request-processing architecture remains the leading candidate for ClawForge's first executable implementation.
+
+Its purpose is not merely to execute requests.
+
+Its purpose is to begin expressing ClawForge's commitment to:
+
+- preserved understanding,
+- deliberate governance,
+- transparent reasoning,
+- replaceable technologies,
+- and continuity across generations.
+
+---
+
+## Next Architectural Question
+
+The next Blueprint discussion is no longer simply:
+
+> Should ClawForge begin with Python?
+
+Instead it becomes:
+
+> Does Python provide an appropriate first reference implementation for expressing ClawForge's Foundation?
+
+The programming language is therefore an implementation decision rather than part of ClawForge's identity.
