@@ -89,3 +89,4 @@ ClawForge is not defined by:
 - or specific implementations.
 
 ClawForge is defined by its commitment to deliberate continuity in the pursuit of better understanding.
+```

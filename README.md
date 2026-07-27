@@ -9,14 +9,14 @@ The project is being developed deliberately: principles first, architecture seco
 ClawForge exists to preserve knowledge, improve reasoning, support responsible human decision-making, and create durable systems that can evolve across technologies, platforms, and generations.
 
 ## Current Status
-```
+
 **Current Build:** 0.0.3 — Blueprint  
 **Status:** Complete
 
 Build 0.0.3 established ClawForge's architectural identity, introduced the Foundation layer, established FP-000 and FP-001, and aligned governance and architecture beneath those principles.
 
 Build 0.0.2 established the project constitution, including architecture, principles, governance, longevity, contribution standards, and roadmap.
-```
+
 ## Project Structure
 
 - [`VISION.md`](VISION.md) — Why ClawForge exists
