@@ -48,7 +48,7 @@ Observation
 Learning
     |
     +------> Foundation Review
-    ```
+```
 
 Each layer has a distinct responsibility:
 
