@@ -1,31 +1,42 @@
 # ClawForge Engineering Journal
 
-The ClawForge Engineering Journal preserves dated working context, observations, discoveries, and project-session history.
+## Purpose
 
-Journal entries are historical records rather than authoritative architecture.
+The ClawForge Engineering Journal preserves the historical narrative of the project.
 
-They may contain:
+Journal entries record what happened, what was learned, why work paused, and how future contributors can understand the project's evolution.
 
-- session summaries
-- project checkpoints
-- unresolved observations
-- lessons learned
-- development context
-- reasons for pausing
-- planned continuation points
+Journal entries are historical records.
 
-Architectural exploration belongs in `BLUEPRINT.md`.
-
-Accepted architectural decisions belong in `docs/decisions/`.
-
-Current architectural truth belongs in `ARCHITECTURE.md`.
-
-Journal entries should not be silently rewritten after they are committed. Corrections or later understanding should be recorded in a new dated entry.
+They are not authoritative architecture.
 
 ---
 
-## Entries
+# Journal Content
 
-### 2026
+Journal entries may include:
 
-- [2026-07-26 — Blueprint and ADR Foundation](journal/2026/2026-07-26.md)
+- session summaries
+- project checkpoints
+- observations
+- lessons learned
+- development context
+- reasons for pausing
+- continuation notes
+
+Architectural exploration belongs within active build documentation.
+
+Accepted architectural decisions belong within Architecture Decision Records.
+
+Current architectural truth belongs within the authoritative documentation of ClawForge.
+
+Journal entries should never be silently rewritten after they have been committed. New understanding should be recorded in a later journal entry so the historical narrative remains intact.
+
+---
+
+# Journal Index
+
+## 2026
+
+- [2026-07-28 — Repository Alignment After Orientation](2026/2026-07-28.md)
+- [2026-07-26 — Blueprint and ADR Foundation](2026/2026-07-26.md)

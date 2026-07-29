@@ -6,9 +6,9 @@
 
 First Principles define the enduring foundations from which ClawForge derives its governance, architecture, engineering decisions, and implementations.
 
-They exist above Architectural Decision Records.
+They exist above Architecture Decision Records.
 
-Where ADRs answer:
+Where Architecture Decision Records answer:
 
 > "What decision was made?"
 
@@ -22,29 +22,29 @@ First Principles answer:
 
 A First Principle:
 
-- describes identity rather than implementation;
+- describes enduring identity rather than implementation;
 - remains applicable across technologies and generations;
 - allows future architectural decisions to be derived from it;
-- exists independently of any specific programming language, repository, or contributor.
+- exists independently of any specific programming language, repository, contributor, or implementation.
 
 First Principles are intentionally rare.
 
-Adding or modifying one should be considered one of the most significant architectural events within ClawForge.
+Adding, removing, or substantially revising a First Principle should be considered one of the most significant architectural events within ClawForge.
 
 ---
 
 ## Evolution
 
-Because understanding itself evolves, First Principles are not considered absolutely immutable.
+Because understanding evolves, First Principles are not considered absolutely immutable.
 
-However, they are expected to remain exceptionally stable.
+They are, however, expected to remain exceptionally stable.
 
 Any revision must:
 
 - preserve the historical lineage of the principle,
 - explain why previous reasoning became insufficient,
 - document the evidence supporting the revision,
-- demonstrate that the change better fulfills ClawForge's enduring purpose.
+- demonstrate that the revision better fulfills ClawForge's enduring purpose.
 
 The rarity of such revisions is a feature rather than a limitation.
 
@@ -52,20 +52,47 @@ The rarity of such revisions is a feature rather than a limitation.
 
 ## Relationship to ClawForge
 
-Vision provides purpose.
+The governance of ClawForge is layered.
 
-First Principles provide identity.
+Each layer derives from the one above it.
 
-Governance provides decision-making.
+```text
+Vision
+    │
+    ▼
+Foundation
+    │
+    ▼
+Orientation
+    │
+    ▼
+First Principles
+    │
+    ▼
+Governance
+    │
+    ▼
+Architecture
+    │
+    ▼
+Engineering
+    │
+    ▼
+Implementation
+    │
+    ▼
+Observation
+    │
+    ▼
+Learning
+```
 
-Architecture provides structure.
+Vision establishes purpose.
 
-Engineering provides execution.
+Foundation establishes enduring identity.
 
-Implementation provides reality.
+Orientation establishes sufficient understanding.
 
-Observation provides evidence.
+First Principles establish enduring truths from which governance and architecture are derived.
 
-Learning informs future understanding.
-
-Every layer derives from the one above it.
+Every subsequent layer should remain consistent with the layers above it.

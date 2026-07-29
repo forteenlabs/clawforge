@@ -4,9 +4,9 @@
 
 ## Principle
 
-Understanding advances most effectively when successive contributors can deliberately preserve, evaluate, and improve prior understanding without losing its historical continuity.
+Understanding advances most effectively when successive contributors deliberately preserve, evaluate, and improve prior understanding without losing its historical continuity.
 
-ClawForge therefore exists to preserve the understanding necessary for future contributors to learn from the past while remaining free to improve upon it.
+ClawForge exists to preserve the understanding necessary for future contributors to learn from the past while remaining free to improve upon it.
 
 Continuity exists to enable learning.
 
@@ -26,7 +26,9 @@ Progress is achieved neither through rigid preservation nor through continual re
 
 Instead, progress emerges when contributors preserve sufficient understanding to deliberately improve what already exists.
 
-Understanding, rather than information alone, is therefore ClawForge's primary architectural asset.
+Understanding, rather than information alone, is ClawForge's primary architectural asset.
+
+Deliberate continuity requires both preservation and responsible evolution.
 
 ---
 
@@ -35,11 +37,11 @@ Understanding, rather than information alone, is therefore ClawForge's primary a
 From this principle naturally follow:
 
 - Documentation preserves understanding.
-- ADRs preserve accepted reasoning.
-- Engineering Journals preserve exploration.
-- Architecture preserves structure.
+- Architecture Decision Records preserve accepted architectural decisions.
+- Engineering Journals preserve historical discovery.
+- Architecture preserves the current structure of the system.
 - Governance preserves trust.
-- Contributors preserve continuity.
+- Contributors preserve continuity through responsible participation.
 
 These are not ends unto themselves.
 
@@ -70,6 +72,7 @@ This process exists to prevent both dogmatism and directionless change.
 
 Future decisions should strengthen the ability of future contributors to:
 
+- orient themselves to the current state,
 - understand previous reasoning,
 - evaluate it fairly,
 - improve it deliberately,
@@ -88,5 +91,4 @@ ClawForge is not defined by:
 - individual contributors,
 - or specific implementations.
 
-ClawForge is defined by its commitment to deliberate continuity in the pursuit of better understanding.
-```
+ClawForge is defined by its commitment to deliberate continuity in pursuit of better understanding.

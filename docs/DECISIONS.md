@@ -1,22 +1,24 @@
 # ClawForge Architecture Decisions
 
-This document indexes ClawForge Architecture Decision Records (ADRs).
+## Purpose
 
-Architecture Decision Records preserve significant engineering decisions, the reasoning behind them, and the architectural consequences of those decisions.
+This document is the official index of ClawForge Architecture Decision Records (ADRs).
 
-ADRs derive from the ClawForge Foundation.
+Architecture Decision Records preserve significant architectural decisions, the reasoning that led to them, and the consequences of adopting them.
 
-They interpret and apply First Principles.
+This document does not contain the decisions themselves.
 
-They do not redefine them.
-
-The rules governing Architecture Decision Records are established by ADR-0000.
+Its purpose is to record which Architecture Decision Records have been accepted and where they fit within the governance of ClawForge.
 
 ---
 
-## Relationship to the Foundation
+# Relationship to ClawForge Governance
 
-Before proposing an ADR, contributors should determine whether the question has already been answered by an existing First Principle.
+Architecture Decision Records exist within the broader governance of ClawForge.
+
+They do not establish ClawForge's identity.
+
+They apply and interpret that identity.
 
 The relationship is:
 
@@ -27,59 +29,65 @@ Vision
 Foundation
     │
     ▼
+Orientation
+    │
+    ▼
+First Principles
+    │
+    ▼
 Architecture Decision Records
     │
     ▼
-Architecture
-    │
-    ▼
-Engineering
+Authoritative Architecture
     │
     ▼
 Implementation
 ```
 
-First Principles define enduring identity.
+Each layer builds upon the one above it.
 
-Architecture Decision Records preserve significant architectural decisions made in service of that identity.
+Architecture Decision Records should never redefine Vision, Foundation, Orientation, or accepted First Principles.
+
+Instead, they preserve important architectural decisions made in service of those governing documents.
 
 ---
 
-## Accepted Decisions
+# Creating Architecture Decisions
 
-### ADR-0000 — Architecture Decision Records
+New Architecture Decision Records should be created only after sufficient architectural understanding has been established.
 
-Defines:
+Active exploration, questions, alternatives, and provisional ideas belong within the current build documentation until an architectural decision has been accepted.
 
-- what an ADR is,
-- when an ADR is required,
-- how ADRs are accepted,
-- and how future ADRs supersede earlier architectural decisions without rewriting history.
+Once accepted, the decision is preserved as an ADR and becomes part of ClawForge's permanent architectural history.
+
+The rules governing the Architecture Decision Record process are defined by ADR-0000.
+
+---
+
+# Architecture Decision Record Index
+
+## ADR-0000 — Architecture Decision Records
 
 **Status:** Frozen
 
+Defines:
+
+- what an Architecture Decision Record is,
+- when an ADR is required,
+- how ADRs are accepted,
+- how ADRs are maintained,
+- and how future ADRs supersede earlier architectural decisions without rewriting history.
+
 ---
 
-## Candidate Decisions
+# Superseded Architecture Decisions
 
 None.
 
-The original concepts explored for ADR-0001 matured into the Foundation layer represented by FP-000 and FP-001 rather than becoming an ADR.
-
 ---
 
-## Active Architectural Discussions
+# Future Decisions
 
-### Initial Reference Implementation Language
+This index intentionally records only accepted Architecture Decision Records.
 
-Python is currently being evaluated as ClawForge's first reference implementation language.
-
-This is an implementation decision rather than an identity decision.
-
-**Status:** Active Blueprint Discussion
-
----
-
-## Superseded Decisions
-
-None.
+Candidate decisions, architectural discussions, and exploratory work belong within active build documentation until they become accepted architectural decisions.
