@@ -80,6 +80,23 @@ Defines:
 
 ---
 
+## ADR-0001 — Integrity-Governed Change
+
+**Status:** Accepted
+
+Defines:
+
+- how ClawForge classifies proposed changes
+- the eight checks used to evaluate meaningful changes
+- the requirements for `HOLD` and scoped `PROCEED` results
+- verification and deliberate finalization
+- Lightweight Review for demonstrably non-meaningful corrections
+- heightened protection and Challenge Review for Protected Changes
+- ClawForge's role as the governed Integrity evaluator
+- the Integrity Memory required to preserve how and why ClawForge changes
+
+---
+
 # Superseded Architecture Decisions
 
 None.

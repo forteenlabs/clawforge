@@ -42,69 +42,144 @@ Every significant change should answer:
 
 ---
 
-# Decision Levels
+# Change Classification and Integrity Review
 
-## Level 1 — Local
+ClawForge classifies proposed changes according to their effect, not merely the artifact changed, the contributor involved, or the label applied to the work.
 
-Changes affecting only implementation.
+A documentation edit, bug fix, implementation change, or correction may be meaningful when it changes ClawForge's interpretation, behavior, authority, architecture, history, or future decision-making.
 
-Examples:
+When impact is uncertain, the proposal must receive the more protective review path.
 
-- formatting
-- comments
-- documentation wording
-- bug fixes
+## Lightweight Review
 
-These require normal review.
+Lightweight Review applies only to demonstrably non-meaningful corrections.
 
----
+A correction may use the lightweight path when ClawForge can establish that it does not alter:
 
-## Level 2 — Architectural
+- meaning or interpretation
+- behavior or implementation
+- authority, permission, or governance
+- architecture or required process
+- authoritative precedence
+- historical understanding
+- the basis for future decisions
 
-Changes affecting system structure.
+Lightweight Review produces:
 
-Examples:
+- `CONFIRMED NON-MEANINGFUL`
+- `ESCALATE`
 
-- new modules
-- memory model
-- agent framework
-- APIs
-- database structure
+Uncertain, disputed, unsupported, or expanded impact requires `ESCALATE` to the full Integrity process.
 
-These require documented reasoning.
+## Meaningful Changes
 
----
+A proposed change is meaningful when it could alter ClawForge's:
 
-## Level 3 — Constitutional
+- identity
+- governing interpretation
+- authority
+- obligations
+- architecture
+- behavior
+- historical record
+- basis for future decisions
 
-Changes affecting ClawForge's identity.
+Every meaningful change must pass the Integrity process defined by `ADR-0001 — Integrity-Governed Change`.
 
-Examples:
+The evaluation must consider:
 
-- mission
-- principles
+1. Orientation
+2. Intent
+3. Governance
+4. Consistency
+5. Process
+6. Traceability
+7. Consequence
+8. Authority
+
+Every applicable check must be supported by evidence.
+
+The decision must be `HOLD` when required evidence, governance, authority, consistency, or understanding is insufficient.
+
+A `PROCEED` authorizes only the specific next step evaluated.
+
+Implementation must be verified before the result may be deliberately finalized into ClawForge's authoritative state.
+
+## Protected Changes
+
+A meaningful change is protected when it alters or could alter ClawForge's foundational commitments or the mechanisms that protect its integrity.
+
+Protected Changes include changes affecting:
+
+- the Foundation
+- First Principles
 - governance
-- architecture philosophy
-- human responsibility
-- long-term direction
+- authority and approval structures
+- override rules
+- the Integrity process
+- authoritative sources or their precedence
+- the conditions of `HOLD`, `PROCEED`, verification, or finalization
+- the mechanisms used to classify, evaluate, verify, or finalize change
 
-These should be rare.
+Protected Changes require:
 
-They require careful discussion, explicit justification, and updates to the build log.
+- evaluation against the authoritative pre-change state
+- the full Integrity process
+- a distinct Challenge Review
+- heightened verification
+- preservation of the prior authoritative state
+- explicit finalization under authority established before the proposal
+
+A proposal must not define the rules, authority, evidence, or standards by which it approves itself.
+
+Any proposal to weaken, remove, bypass, or redefine these protections is itself a Protected Change.
+
+## Integrity Memory
+
+Every Integrity decision must produce a durable and inspectable record sufficient for future participants to understand:
+
+- what was proposed
+- which authoritative state governed the evaluation
+- what evidence and governing artifacts applied
+- why the result was reached
+- what action was authorized
+- what was implemented
+- how the result was verified
+- why and under whose authority it was finalized
+- what new authoritative state resulted
+
+Earlier reasoning must not be silently rewritten.
+
+Corrections, superseding decisions, implementation differences, uncertainty, and disagreement must remain traceable.
+
+* * *
 
 ---
 
 # Human Responsibility
 
-Artificial intelligence may recommend.
+ClawForge performs the governed Integrity evaluation.
 
-Artificial intelligence may critique.
+Humans, artificial intelligence, agents, implementations, and other participants may:
 
-Artificial intelligence may simulate.
+- propose
+- provide evidence
+- recommend
+- critique
+- simulate
+- operate defined evaluation roles
+- implement authorized work
+- verify results when governance permits
 
-Artificial intelligence does not possess authority over the project.
+No participant may substitute personal assertion, ownership, status, or technical capability for an Integrity decision.
 
-Human contributors remain responsible for consequential decisions.
+Under the governance currently in effect, artificial intelligence does not independently possess consequential approval or finalization authority over ClawForge.
+
+Human contributors remain responsible for consequential approval and finalization.
+
+Any future delegation or expansion of that authority requires separate evaluation as a Protected Change.
+
+* * *
 
 ---
 

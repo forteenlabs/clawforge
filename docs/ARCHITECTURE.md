@@ -65,6 +65,63 @@ The return from learning to Foundation review does not imply frequent changes to
 
 ---
 
+## Governed Change Architecture
+
+ClawForge changes through a governed lifecycle that connects Orientation, Integrity evaluation, implementation, verification, finalization, and durable memory.
+
+```text
+AUTHORITATIVE CLAWFORGE STATE
+            |
+            v
+        ORIENTATION
+            |
+            v
+   DEFINE PROPOSED CHANGE
+            |
+            v
+      CLASSIFY IMPACT
+            |
+            +---- NON-MEANINGFUL
+            |           |
+            |           v
+            |   LIGHTWEIGHT REVIEW
+            |           |
+            |           +---- ESCALATE
+            |           |
+            |           +---- CONFIRMED NON-MEANINGFUL
+            |
+            +---- MEANINGFUL OR PROTECTED
+                        |
+                        v
+              INTEGRITY EVALUATION
+                        |
+                        +---- HOLD
+                        |       |
+                        |       v
+                        |   EXPLAIN, REMEDIATE,
+                        |   AND RE-EVALUATE
+                        |
+                        +---- PROCEED
+                                |
+                                v
+                           IMPLEMENT
+                                |
+                                v
+                         VERIFY RESULT
+                                |
+                                +---- HOLD
+                                |
+                                +---- FINALIZE
+                                        |
+                                        v
+                              NEW AUTHORITATIVE STATE
+                                        |
+                                        v
+                                INTEGRITY MEMORY
+                                        |
+                                        +----> FUTURE ORIENTATION
+```
+
 ## Current State
 
 ClawForge now has an established Foundation layer containing:
@@ -74,4 +131,17 @@ ClawForge now has an established Foundation layer containing:
 
 These principles establish that ClawForge must preserve enough understanding and historical continuity for successive contributors to evaluate and deliberately improve what came before.
 
-The executable architecture remains intentionally minimal while the project prepares to evaluate its first reference implementation.
+ClawForge also has two accepted architectural lifecycles:
+
+- Orientation establishes sufficient understanding before responsible participation.
+- Integrity-Governed Change controls how meaningful proposals move from evaluation through implementation, verification, finalization, and durable memory.
+
+These lifecycles are established through:
+
+- `Build 0.0.4 — Orientation`
+- `Build 0.0.5 — Integrity`
+- `ADR-0001 — Integrity-Governed Change`
+
+The executable architecture remains intentionally minimal.
+
+ClawForge has defined the governing structure required for its first reference implementation, but the implementation language, executable interfaces, Integrity Record schema, and operating commands remain subject to later architectural decisions.
