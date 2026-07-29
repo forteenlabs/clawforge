@@ -38,5 +38,6 @@ Journal entries should never be silently rewritten after they have been committe
 
 ## 2026
 
+- [2026-07-29 — Build 0.0.5 Integrity Finalized](2026/2026-07-29.md)
 - [2026-07-28 — Repository Alignment After Orientation](2026/2026-07-28.md)
 - [2026-07-26 — Blueprint and ADR Foundation](2026/2026-07-26.md)

@@ -1,81 +1,85 @@
 # ClawForge Session Handoff
 
-**Last Updated:** 2026-07-28  
-**Repository State:** Known Good State  
-**Current Commit:** c81cb8d
+Last Updated: 2026-07-29  
+Repository State: Known Good State  
+Build 0.0.5 Finalization Commit: `291366a`
 
----
+* * *
 
 # Current Status
 
-The repository has completed its post–Build 0.0.4 alignment.
+Build 0.0.5 — Integrity has been completed and officially closed.
 
-All primary governing documents have been reviewed and aligned to reflect the current architectural understanding.
+Builds 0.0.1 through 0.0.5 are complete.
 
-The repository is synchronized with GitHub and the working tree is clean.
+There is no active build.
 
----
+ClawForge now has accepted architecture for:
+
+- Foundation
+- Constitution
+- Blueprint
+- Orientation
+- Integrity-Governed Change
+
+The repository was synchronized with GitHub and the working tree was clean before the journal and handoff closing update.
+
+* * *
 
 # Start Here
 
 Before beginning new work:
 
 1. Read this handoff.
-2. Orient yourself to the current repository.
-3. Confirm the repository remains in a Known Good State.
-4. Resume the next architectural discussion rather than reopening completed alignment work.
+2. Confirm the repository is clean and synchronized.
+3. Review `BUILD_LOG.md`.
+4. Review `docs/ROADMAP.md`.
+5. Orient to `ADR-0001 — Integrity-Governed Change`.
+6. Select the next architectural question deliberately.
+7. Do not begin a new build until its scope has been separately defined.
 
----
+* * *
 
-# Current Architecture
-
-Completed Builds:
+# Completed Builds
 
 - Build 0.0.1 — Foundation
 - Build 0.0.2 — Constitution
 - Build 0.0.3 — Blueprint
 - Build 0.0.4 — Orientation
+- Build 0.0.5 — Integrity
 
-Repository governance has been aligned to these completed builds.
+* * *
 
----
+# Current Accepted Architecture
 
-# Repository Philosophy
+Build 0.0.4 established that sufficient Orientation must precede responsible participation.
 
-The repository follows a deliberate separation of responsibilities.
+Build 0.0.5 established that meaningful changes must move through:
 
-| Document | Responsibility |
-|----------|----------------|
-| README | Orient new participants |
-| BUILD_LOG | Current project state |
-| ROADMAP | Long-term direction |
-| CONTRIBUTING | Expected contributor behavior |
-| DECISIONS | Architecture Decision Record index |
-| Foundation | Enduring identity |
-| Build Artifacts | Historical discovery |
-| Journal | Historical narrative |
-| ADRs | Accepted architectural decisions |
-
-Every document should have one primary responsibility.
-
-Every truth should have one authoritative home.
-
----
-
-# Next Session
-
-Resume architectural discovery.
-
-Do not continue repository alignment unless a newly accepted architectural decision requires it.
-
-The next objective is to determine the architectural question that naturally follows Orientation and begin the next build.
-
----
-
-# Session Close
-
-Repository verified.
-
-Published.
-
-Known Good State.
+```text
+ORIENTATION
+    |
+    v
+IMPACT CLASSIFICATION
+    |
+    v
+INTEGRITY EVALUATION
+    |
+    +---- HOLD
+    |
+    +---- PROCEED
+            |
+            v
+        IMPLEMENT
+            |
+            v
+        VERIFY
+            |
+            v
+        FINALIZE
+            |
+            v
+    AUTHORITATIVE STATE
+            |
+            v
+      INTEGRITY MEMORY
