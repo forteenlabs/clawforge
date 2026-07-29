@@ -12,17 +12,20 @@ Each completed build has a permanent record in the `builds` directory. The Build
 - [Build 0.0.2 — Constitution](builds/0.0.2-constitution.md)
 - [Build 0.0.3 — Blueprint](builds/0.0.3-blueprint.md)
 - [Build 0.0.4 — Orientation](builds/0.0.4-orientation.md)
+- [Build 0.0.5 — Integrity](builds/0.0.5-integrity.md)
 
 ---
 
 ## Current Build
 
-### Build 0.0.5 — Integrity
+### No Active Build
 
-Status: Active Discovery
+Status: Build 0.0.5 Finalized
 
-Build 0.0.5 defines how ClawForge evaluates meaningful proposed changes to itself before allowing them to become part of the project.
+Build 0.0.5 has been completed and officially closed.
 
-The build begins with one architectural question:
+ClawForge now governs meaningful changes through Orientation, impact classification, Integrity evaluation, actionable `HOLD` or scoped `PROCEED`, implementation, verification, deliberate finalization, and durable Integrity Memory.
 
-> What must ClawForge verify before allowing a meaningful proposed change to become part of ClawForge?
+`ADR-0001`, `GOVERNANCE.md`, and `ARCHITECTURE.md` preserve the accepted permanent architecture.
+
+The next build has not yet been defined.
