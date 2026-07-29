@@ -17,14 +17,12 @@ Each completed build has a permanent record in the `builds` directory. The Build
 
 ## Current Build
 
-### No Active Build
+### Build 0.0.5 — Integrity
 
-**Status:** Repository Alignment
+Status: Active Discovery
 
-Build 0.0.4 has been completed and officially closed.
+Build 0.0.5 defines how ClawForge evaluates meaningful proposed changes to itself before allowing them to become part of the project.
 
-ClawForge now distinguishes Orientation from implementation. Every participant and implementation must establish sufficient understanding before contributing responsibly.
+The build begins with one architectural question:
 
-The repository is currently undergoing alignment to ensure all governing documents accurately reflect the project's current architectural state.
-
-Once repository alignment is complete, the next build will begin from a fully oriented repository.
+> What must ClawForge verify before allowing a meaningful proposed change to become part of ClawForge?
