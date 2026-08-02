@@ -13,12 +13,20 @@ Each completed build has a permanent record in the `builds` directory. The Build
 - [Build 0.0.3 — Blueprint](builds/0.0.3-blueprint.md)
 - [Build 0.0.4 — Orientation](builds/0.0.4-orientation.md)
 - [Build 0.0.5 — Integrity](builds/0.0.5-integrity.md)
-
+- [Build 0.0.6 — State](builds/0.0.6-state.md)
 ---
 
 ## Current Build
 
-### No Active Build
+### Build 0.0.6 — State
+
+Status: Active Discovery
+
+Build 0.0.6 defines ClawForge's first executable capability: observing and communicating the current state of a ClawForge repository before interpretation, evaluation, or modification begins.
+
+The build initially distinguishes read-only Local State from explicitly refreshed Remote State and preserves the governed distinction between technical cleanliness and Known Good State.
+
+Current Known Good State: `6f07d08`
 
 Status: Build 0.0.5 Finalized
 
