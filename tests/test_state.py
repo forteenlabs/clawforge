@@ -9,6 +9,10 @@ from clawforge.artifacts import (
     ArtifactInventory,
     ArtifactRecord,
 )
+from clawforge.build_state import (
+    BuildDeclaration,
+    BuildStateEvidence,
+)
 
 from clawforge.state import (
     LocalState,
@@ -428,6 +432,106 @@ class FormatStateReportTests(unittest.TestCase):
             "BUILD_LOG.md could not be interpreted.",
             report,
         )
+
+
+    def test_report_includes_consistent_build_state(
+        self,
+    ) -> None:
+        local_state = LocalState(
+            repository_root=Path("C:/example/clawforge"),
+            branch="main",
+            commit="abc1234",
+            tracked_changes=(),
+            untracked_files=(),
+        )
+
+        build_state = BuildStateEvidence(
+            completed_builds=(
+                BuildDeclaration(
+                    identifier="0.0.1",
+                    title="Foundation",
+                    line=11,
+                    relative_path="builds/0.0.1-foundation.md",
+                ),
+            ),
+            current_builds=(
+                BuildDeclaration(
+                    identifier="0.0.2",
+                    title="State",
+                    line=21,
+                ),
+            ),
+            current_statuses=("Active Discovery",),
+            known_good_states=("abc1234",),
+            no_active_build_declared=False,
+            issues=(),
+        )
+
+        report = format_state_report(
+            local_state,
+            build_state=build_state,
+        )
+
+        self.assertIn("Build state: consistent", report)
+        self.assertIn("Completed builds: 1", report)
+        self.assertIn("Current build: 0.0.2 - State", report)
+        self.assertIn("Current status: Active Discovery", report)
+        self.assertIn("Known Good State: abc1234", report)
+        self.assertIn("Build-state issues: 0", report)
+
+    def test_report_preserves_build_state_conflicts(
+        self,
+    ) -> None:
+        local_state = LocalState(
+            repository_root=Path("C:/example/clawforge"),
+            branch="main",
+            commit="abc1234",
+            tracked_changes=(),
+            untracked_files=(),
+        )
+
+        issue = (
+            "BUILD_LOG.md declares Build 0.0.2 as both current "
+            "and completed."
+        )
+
+        build_state = BuildStateEvidence(
+            completed_builds=(
+                BuildDeclaration(
+                    identifier="0.0.2",
+                    title="State",
+                    line=11,
+                    relative_path="builds/0.0.2-state.md",
+                ),
+            ),
+            current_builds=(
+                BuildDeclaration(
+                    identifier="0.0.2",
+                    title="State",
+                    line=21,
+                ),
+            ),
+            current_statuses=(
+                "Active Discovery",
+                "Build 0.0.1 Finalized",
+            ),
+            known_good_states=("abc1234",),
+            no_active_build_declared=False,
+            issues=(issue,),
+        )
+
+        report = format_state_report(
+            local_state,
+            build_state=build_state,
+        )
+
+        self.assertIn("Build state: inconsistent", report)
+        self.assertIn(
+            "Current status: ambiguous (2 declarations)",
+            report,
+        )
+        self.assertIn("Build-state issues: 1", report)
+        self.assertIn(issue, report)
 
 
 if __name__ == "__main__":

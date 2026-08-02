@@ -9,6 +9,10 @@ from clawforge.artifacts import (
     ArtifactInventory,
     discover_artifacts,
 )
+from clawforge.build_state import (
+    BuildStateEvidence,
+    inspect_build_state,
+)
 
 
 class StateError(RuntimeError):
@@ -252,6 +256,7 @@ def format_state_report(
     local_state: LocalState,
     remote_state: RemoteState | None = None,
     artifact_inventory: ArtifactInventory | None = None,
+    build_state: BuildStateEvidence | None = None,
 ) -> str:
     """Format collected State evidence for a human reader."""
 
@@ -337,6 +342,75 @@ def format_state_report(
                 for issue in artifact_inventory.issues
             )
 
+    if build_state is not None:
+        build_status = (
+            "consistent"
+            if build_state.is_consistent
+            else "inconsistent"
+        )
+
+        lines.extend(
+            [
+                f"Build state: {build_status}",
+                (
+                    "Completed builds: "
+                    f"{len(build_state.completed_builds)}"
+                ),
+            ]
+        )
+
+        if build_state.current_build is not None:
+            lines.append(
+                "Current build: "
+                f"{build_state.current_build.identifier} - "
+                f"{build_state.current_build.title}"
+            )
+        elif build_state.no_active_build_declared:
+            lines.append("Current build: none declared")
+        elif build_state.current_builds:
+            lines.append(
+                "Current build: ambiguous "
+                f"({len(build_state.current_builds)} declarations)"
+            )
+        else:
+            lines.append("Current build: unavailable")
+
+        if build_state.current_status is not None:
+            lines.append(
+                f"Current status: {build_state.current_status}"
+            )
+        elif build_state.current_statuses:
+            lines.append(
+                "Current status: ambiguous "
+                f"({len(build_state.current_statuses)} declarations)"
+            )
+        else:
+            lines.append("Current status: not declared")
+
+        if build_state.known_good_state is not None:
+            lines.append(
+                "Known Good State: "
+                f"{build_state.known_good_state}"
+            )
+        elif build_state.known_good_states:
+            lines.append(
+                "Known Good State: ambiguous "
+                f"({len(build_state.known_good_states)} declarations)"
+            )
+        else:
+            lines.append("Known Good State: not declared")
+
+        lines.append(
+            f"Build-state issues: {len(build_state.issues)}"
+        )
+
+        if build_state.issues:
+            lines.append("Build-state issue details:")
+            lines.extend(
+                f"  {issue}"
+                for issue in build_state.issues
+            )
+
     if local_state.tracked_changes:
         lines.append("Tracked change details:")
         lines.extend(
@@ -374,11 +448,16 @@ def run_state(
         local_state.repository_root
     )
 
+    build_state = inspect_build_state(
+        local_state.repository_root
+    )
+
     print(
         format_state_report(
             local_state,
             remote_state,
             artifact_inventory,
+            build_state,
         )
     )
     return 0
