@@ -13,6 +13,10 @@ from clawforge.build_state import (
     BuildStateEvidence,
     inspect_build_state,
 )
+from clawforge.known_good import (
+    KnownGoodEvidence,
+    inspect_known_good,
+)
 
 
 class StateError(RuntimeError):
@@ -257,6 +261,7 @@ def format_state_report(
     remote_state: RemoteState | None = None,
     artifact_inventory: ArtifactInventory | None = None,
     build_state: BuildStateEvidence | None = None,
+    known_good: KnownGoodEvidence | None = None,
 ) -> str:
     """Format collected State evidence for a human reader."""
 
@@ -411,6 +416,42 @@ def format_state_report(
                 for issue in build_state.issues
             )
 
+    if known_good is not None:
+        if known_good.commit_exists is True:
+            commit_exists = "yes"
+        elif known_good.commit_exists is False:
+            commit_exists = "no"
+        else:
+            commit_exists = "unknown"
+
+        lines.extend(
+            [
+                (
+                    "Known Good verification: "
+                    f"{known_good.status}"
+                ),
+                (
+                    "Declared Known Good commit: "
+                    f"{known_good.declared_commit or 'not declared'}"
+                ),
+                (
+                    "Known Good commit exists: "
+                    f"{commit_exists}"
+                ),
+            ]
+        )
+
+        if known_good.resolved_commit is not None:
+            lines.append(
+                "Resolved Known Good commit: "
+                f"{known_good.resolved_commit}"
+            )
+
+        if known_good.detail is not None:
+            lines.append(
+                f"Known Good detail: {known_good.detail}"
+            )
+
     if local_state.tracked_changes:
         lines.append("Tracked change details:")
         lines.extend(
@@ -452,12 +493,18 @@ def run_state(
         local_state.repository_root
     )
 
+    known_good = inspect_known_good(
+        local_state.repository_root,
+        build_state.known_good_state,
+    )
+
     print(
         format_state_report(
             local_state,
             remote_state,
             artifact_inventory,
             build_state,
+            known_good,
         )
     )
     return 0

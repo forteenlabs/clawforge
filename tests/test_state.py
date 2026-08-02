@@ -13,6 +13,7 @@ from clawforge.build_state import (
     BuildDeclaration,
     BuildStateEvidence,
 )
+from clawforge.known_good import KnownGoodEvidence
 
 from clawforge.state import (
     LocalState,
@@ -532,6 +533,91 @@ class FormatStateReportTests(unittest.TestCase):
         )
         self.assertIn("Build-state issues: 1", report)
         self.assertIn(issue, report)
+
+
+    def test_report_includes_known_good_ancestor_evidence(
+        self,
+    ) -> None:
+        local_state = LocalState(
+            repository_root=Path("C:/example/clawforge"),
+            branch="main",
+            commit="def5678",
+            tracked_changes=(),
+            untracked_files=(),
+        )
+
+        known_good = KnownGoodEvidence(
+            declared_commit="abc1234",
+            resolved_commit=(
+                "abc1234567890abc1234567890abc1234567890"
+            ),
+            status="ancestor",
+        )
+
+        report = format_state_report(
+            local_state,
+            known_good=known_good,
+        )
+
+        self.assertIn(
+            "Known Good verification: ancestor",
+            report,
+        )
+        self.assertIn(
+            "Declared Known Good commit: abc1234",
+            report,
+        )
+        self.assertIn(
+            "Known Good commit exists: yes",
+            report,
+        )
+        self.assertIn(
+            "Resolved Known Good commit: "
+            "abc1234567890abc1234567890abc1234567890",
+            report,
+        )
+
+    def test_report_preserves_missing_known_good_evidence(
+        self,
+    ) -> None:
+        local_state = LocalState(
+            repository_root=Path("C:/example/clawforge"),
+            branch="main",
+            commit="def5678",
+            tracked_changes=(),
+            untracked_files=(),
+        )
+
+        detail = (
+            "The declared Known Good State could not be "
+            "resolved as a commit."
+        )
+
+        known_good = KnownGoodEvidence(
+            declared_commit="deadbee",
+            resolved_commit=None,
+            status="missing",
+            detail=detail,
+        )
+
+        report = format_state_report(
+            local_state,
+            known_good=known_good,
+        )
+
+        self.assertIn(
+            "Known Good verification: missing",
+            report,
+        )
+        self.assertIn(
+            "Declared Known Good commit: deadbee",
+            report,
+        )
+        self.assertIn(
+            "Known Good commit exists: no",
+            report,
+        )
+        self.assertIn(detail, report)
 
 
 if __name__ == "__main__":
