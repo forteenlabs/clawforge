@@ -7,18 +7,20 @@ from pathlib import Path
 
 from clawforge.state import (
     LocalState,
+    RemoteState,
     StateError,
     collect_local_state,
+    collect_remote_state,
     format_state_report,
 )
 
 
-def run_git(repository: Path, *arguments: str) -> str:
-    """Run Git inside a test repository."""
+def run_git(location: Path, *arguments: str) -> str:
+    """Run Git in a test location."""
 
     completed = subprocess.run(
         ["git", *arguments],
-        cwd=repository,
+        cwd=location,
         capture_output=True,
         text=True,
         encoding="utf-8",
@@ -29,19 +31,95 @@ def run_git(repository: Path, *arguments: str) -> str:
     return completed.stdout.strip()
 
 
+def configure_identity(repository: Path) -> None:
+    """Configure a local identity for test commits."""
+
+    run_git(
+        repository,
+        "config",
+        "user.name",
+        "ClawForge Test",
+    )
+    run_git(
+        repository,
+        "config",
+        "user.email",
+        "test@clawforge.local",
+    )
+    run_git(
+        repository,
+        "config",
+        "core.autocrlf",
+        "false",
+    )
+
+
 def create_repository(repository: Path) -> None:
-    """Create a minimal committed Git repository for testing."""
+    """Create a minimal committed Git repository."""
 
     run_git(repository, "init", "-b", "main")
-    run_git(repository, "config", "user.name", "ClawForge Test")
-    run_git(repository, "config", "user.email", "test@clawforge.local")
-    run_git(repository, "config", "core.autocrlf", "false")
+    configure_identity(repository)
 
-    readme = repository / "README.md"
-    readme.write_text("# Test Repository\n", encoding="utf-8")
+    commit_file(
+        repository,
+        "README.md",
+        "# Test Repository\n",
+        "Create test repository",
+    )
 
-    run_git(repository, "add", "README.md")
-    run_git(repository, "commit", "-m", "Create test repository")
+
+def commit_file(
+    repository: Path,
+    filename: str,
+    content: str,
+    message: str,
+) -> None:
+    """Write and commit one file in a test repository."""
+
+    file_path = repository / filename
+    file_path.write_text(content, encoding="utf-8")
+
+    run_git(repository, "add", filename)
+    run_git(repository, "commit", "-m", message)
+
+
+def create_remote_pair(root: Path) -> tuple[Path, Path]:
+    """Create a local repository with a configured bare remote."""
+
+    remote = root / "remote.git"
+    remote.mkdir()
+    run_git(remote, "init", "--bare")
+
+    local = root / "local"
+    local.mkdir()
+    create_repository(local)
+
+    run_git(local, "remote", "add", "origin", str(remote))
+    run_git(local, "push", "-u", "origin", "main")
+
+    run_git(
+        remote,
+        "symbolic-ref",
+        "HEAD",
+        "refs/heads/main",
+    )
+
+    return local, remote
+
+
+def create_peer(root: Path, remote: Path) -> Path:
+    """Create a second repository connected to the test remote."""
+
+    peer = root / "peer"
+    peer.mkdir()
+
+    run_git(peer, "init", "-b", "main")
+    configure_identity(peer)
+    run_git(peer, "remote", "add", "origin", str(remote))
+    run_git(peer, "fetch", "origin", "main")
+    run_git(peer, "checkout", "-B", "main", "origin/main")
+
+    return peer
 
 
 class CollectLocalStateTests(unittest.TestCase):
@@ -52,7 +130,10 @@ class CollectLocalStateTests(unittest.TestCase):
 
             state = collect_local_state(repository)
 
-            self.assertEqual(state.repository_root, repository.resolve())
+            self.assertEqual(
+                state.repository_root,
+                repository.resolve(),
+            )
             self.assertEqual(state.branch, "main")
             self.assertTrue(state.commit)
             self.assertEqual(state.working_tree, "clean")
@@ -80,9 +161,15 @@ class CollectLocalStateTests(unittest.TestCase):
 
             self.assertEqual(state.working_tree, "modified")
             self.assertTrue(
-                any("README.md" in item for item in state.tracked_changes)
+                any(
+                    "README.md" in item
+                    for item in state.tracked_changes
+                )
             )
-            self.assertEqual(state.untracked_files, ("notes.txt",))
+            self.assertEqual(
+                state.untracked_files,
+                ("notes.txt",),
+            )
 
     def test_raises_state_error_outside_git_repository(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
@@ -92,9 +179,133 @@ class CollectLocalStateTests(unittest.TestCase):
                 collect_local_state(location)
 
 
+class CollectRemoteStateTests(unittest.TestCase):
+    def test_does_not_refresh_without_explicit_request(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            repository = Path(temporary_directory)
+            create_repository(repository)
+
+            local_state = collect_local_state(repository)
+            remote_state = collect_remote_state(local_state)
+
+            self.assertEqual(
+                remote_state,
+                RemoteState(status="not refreshed"),
+            )
+
+    def test_reports_no_upstream_configured(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            repository = Path(temporary_directory)
+            create_repository(repository)
+
+            local_state = collect_local_state(repository)
+            remote_state = collect_remote_state(
+                local_state,
+                refresh=True,
+            )
+
+            self.assertEqual(
+                remote_state.status,
+                "no upstream configured",
+            )
+
+    def test_reports_synchronized(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            local, _ = create_remote_pair(root)
+
+            local_state = collect_local_state(local)
+            remote_state = collect_remote_state(
+                local_state,
+                refresh=True,
+            )
+
+            self.assertEqual(remote_state.status, "synchronized")
+            self.assertEqual(remote_state.upstream, "origin/main")
+            self.assertEqual(remote_state.ahead, 0)
+            self.assertEqual(remote_state.behind, 0)
+
+    def test_reports_locally_ahead(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            local, _ = create_remote_pair(root)
+
+            commit_file(
+                local,
+                "local.txt",
+                "Local change\n",
+                "Create local change",
+            )
+
+            local_state = collect_local_state(local)
+            remote_state = collect_remote_state(
+                local_state,
+                refresh=True,
+            )
+
+            self.assertEqual(remote_state.status, "locally ahead")
+            self.assertEqual(remote_state.ahead, 1)
+            self.assertEqual(remote_state.behind, 0)
+
+    def test_reports_locally_behind(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            local, remote = create_remote_pair(root)
+            peer = create_peer(root, remote)
+
+            commit_file(
+                peer,
+                "peer.txt",
+                "Remote change\n",
+                "Create remote change",
+            )
+            run_git(peer, "push", "origin", "main")
+
+            local_state = collect_local_state(local)
+            remote_state = collect_remote_state(
+                local_state,
+                refresh=True,
+            )
+
+            self.assertEqual(remote_state.status, "locally behind")
+            self.assertEqual(remote_state.ahead, 0)
+            self.assertEqual(remote_state.behind, 1)
+
+    def test_reports_diverged(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            local, remote = create_remote_pair(root)
+            peer = create_peer(root, remote)
+
+            commit_file(
+                local,
+                "local.txt",
+                "Local change\n",
+                "Create local change",
+            )
+
+            commit_file(
+                peer,
+                "peer.txt",
+                "Remote change\n",
+                "Create remote change",
+            )
+            run_git(peer, "push", "origin", "main")
+
+            local_state = collect_local_state(local)
+            remote_state = collect_remote_state(
+                local_state,
+                refresh=True,
+            )
+
+            self.assertEqual(remote_state.status, "diverged")
+            self.assertEqual(remote_state.ahead, 1)
+            self.assertEqual(remote_state.behind, 1)
+
+
 class FormatStateReportTests(unittest.TestCase):
     def test_report_preserves_remote_uncertainty(self) -> None:
-        state = LocalState(
+        local_state = LocalState(
             repository_root=Path("C:/example/clawforge"),
             branch="main",
             commit="abc1234",
@@ -102,10 +313,36 @@ class FormatStateReportTests(unittest.TestCase):
             untracked_files=(),
         )
 
-        report = format_state_report(state)
+        report = format_state_report(local_state)
 
         self.assertIn("Working tree: clean", report)
         self.assertIn("Remote state: not refreshed", report)
+
+    def test_report_includes_remote_relationship(self) -> None:
+        local_state = LocalState(
+            repository_root=Path("C:/example/clawforge"),
+            branch="main",
+            commit="abc1234",
+            tracked_changes=(),
+            untracked_files=(),
+        )
+
+        remote_state = RemoteState(
+            status="locally ahead",
+            upstream="origin/main",
+            ahead=2,
+            behind=0,
+        )
+
+        report = format_state_report(
+            local_state,
+            remote_state,
+        )
+
+        self.assertIn("Remote state: locally ahead", report)
+        self.assertIn("Upstream: origin/main", report)
+        self.assertIn("Ahead: 2", report)
+        self.assertIn("Behind: 0", report)
 
 
 if __name__ == "__main__":

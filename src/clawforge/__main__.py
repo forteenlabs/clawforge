@@ -16,9 +16,18 @@ def build_parser() -> argparse.ArgumentParser:
 
     subcommands = parser.add_subparsers(dest="command")
 
-    subcommands.add_parser(
+    state_parser = subcommands.add_parser(
         "state",
         help="Report observable repository state.",
+    )
+
+    state_parser.add_argument(
+        "--refresh-remote",
+        action="store_true",
+        help=(
+            "Explicitly fetch the current branch's configured remote "
+            "before comparing local and upstream state."
+        ),
     )
 
     return parser
@@ -31,7 +40,9 @@ def main(arguments: Sequence[str] | None = None) -> int:
     parsed = parser.parse_args(arguments)
 
     if parsed.command == "state":
-        return run_state()
+        return run_state(
+            refresh_remote=parsed.refresh_remote,
+        )
 
     parser.print_help()
     return 0
