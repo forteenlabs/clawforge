@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clawforge"
+
+# Development package version aligned with the active build.
+# This does not establish ClawForge's permanent release-versioning policy.
+version = "0.0.6.dev0"
+
+description = "A durable platform for human-AI collaboration."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+clawforge = "clawforge.__main__:main"
+cf = "clawforge.__main__:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
