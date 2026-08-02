@@ -5,6 +5,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from clawforge.artifacts import (
+    ArtifactInventory,
+    ArtifactRecord,
+)
+
 from clawforge.state import (
     LocalState,
     RemoteState,
@@ -343,6 +348,86 @@ class FormatStateReportTests(unittest.TestCase):
         self.assertIn("Upstream: origin/main", report)
         self.assertIn("Ahead: 2", report)
         self.assertIn("Behind: 0", report)
+
+
+    def test_report_includes_complete_artifact_inventory(
+        self,
+    ) -> None:
+        local_state = LocalState(
+            repository_root=Path("C:/example/clawforge"),
+            branch="main",
+            commit="abc1234",
+            tracked_changes=(),
+            untracked_files=(),
+        )
+
+        inventory = ArtifactInventory(
+            anchors=(
+                ArtifactRecord(
+                    category="anchor",
+                    identifier="VISION.md",
+                    relative_path="VISION.md",
+                    status="present",
+                    source="stable anchor definition",
+                ),
+            ),
+            builds=(),
+            foundation=(),
+            decisions=(),
+            issues=(),
+        )
+
+        report = format_state_report(
+            local_state,
+            artifact_inventory=inventory,
+        )
+
+        self.assertIn("Artifact inventory: complete", report)
+        self.assertIn("Stable anchors: 1", report)
+        self.assertIn("Missing artifacts: 0", report)
+        self.assertIn("Discovery issues: 0", report)
+
+    def test_report_preserves_incomplete_artifact_evidence(
+        self,
+    ) -> None:
+        local_state = LocalState(
+            repository_root=Path("C:/example/clawforge"),
+            branch="main",
+            commit="abc1234",
+            tracked_changes=(),
+            untracked_files=(),
+        )
+
+        inventory = ArtifactInventory(
+            anchors=(
+                ArtifactRecord(
+                    category="anchor",
+                    identifier="VISION.md",
+                    relative_path="VISION.md",
+                    status="missing",
+                    source="stable anchor definition",
+                ),
+            ),
+            builds=(),
+            foundation=(),
+            decisions=(),
+            issues=(
+                "BUILD_LOG.md could not be interpreted.",
+            ),
+        )
+
+        report = format_state_report(
+            local_state,
+            artifact_inventory=inventory,
+        )
+
+        self.assertIn("Artifact inventory: incomplete", report)
+        self.assertIn("Missing artifacts: 1", report)
+        self.assertIn("[anchor] VISION.md", report)
+        self.assertIn(
+            "BUILD_LOG.md could not be interpreted.",
+            report,
+        )
 
 
 if __name__ == "__main__":

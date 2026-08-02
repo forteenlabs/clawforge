@@ -5,6 +5,11 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
+from clawforge.artifacts import (
+    ArtifactInventory,
+    discover_artifacts,
+)
+
 
 class StateError(RuntimeError):
     """Raised when repository state evidence cannot be collected."""
@@ -246,6 +251,7 @@ def collect_remote_state(
 def format_state_report(
     local_state: LocalState,
     remote_state: RemoteState | None = None,
+    artifact_inventory: ArtifactInventory | None = None,
 ) -> str:
     """Format collected State evidence for a human reader."""
 
@@ -275,6 +281,61 @@ def format_state_report(
 
     if observed_remote.detail is not None:
         lines.append(f"Remote detail: {observed_remote.detail}")
+
+    if artifact_inventory is not None:
+        artifact_status = (
+            "complete"
+            if artifact_inventory.missing_count == 0
+            and not artifact_inventory.issues
+            else "incomplete"
+        )
+
+        lines.extend(
+            [
+                f"Artifact inventory: {artifact_status}",
+                f"Stable anchors: {len(artifact_inventory.anchors)}",
+                f"Build records: {len(artifact_inventory.builds)}",
+                (
+                    "Foundation principles: "
+                    f"{len(artifact_inventory.foundation)}"
+                ),
+                (
+                    "Accepted/Frozen ADRs: "
+                    f"{len(artifact_inventory.decisions)}"
+                ),
+                (
+                    "Missing artifacts: "
+                    f"{artifact_inventory.missing_count}"
+                ),
+                (
+                    "Discovery issues: "
+                    f"{len(artifact_inventory.issues)}"
+                ),
+            ]
+        )
+
+        missing_records = tuple(
+            record
+            for record in artifact_inventory.records
+            if record.status == "missing"
+        )
+
+        if missing_records:
+            lines.append("Missing artifact details:")
+            lines.extend(
+                (
+                    f"  [{record.category}] "
+                    f"{record.relative_path}"
+                )
+                for record in missing_records
+            )
+
+        if artifact_inventory.issues:
+            lines.append("Artifact discovery issues:")
+            lines.extend(
+                f"  {issue}"
+                for issue in artifact_inventory.issues
+            )
 
     if local_state.tracked_changes:
         lines.append("Tracked change details:")
@@ -309,5 +370,15 @@ def run_state(
         refresh=refresh_remote,
     )
 
-    print(format_state_report(local_state, remote_state))
+    artifact_inventory = discover_artifacts(
+        local_state.repository_root
+    )
+
+    print(
+        format_state_report(
+            local_state,
+            remote_state,
+            artifact_inventory,
+        )
+    )
     return 0
