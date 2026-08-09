@@ -18,15 +18,15 @@ Rather than preserving answers, ClawForge preserves the reasoning necessary for 
 
 # Current State
 
-**Latest Completed Build:** **0.0.5 — Integrity**
+**Latest Completed Build:** **0.0.6 — State**
 
-**Current Build:** **0.0.6 — State**
+**Repository Status:** **No Active Build**
 
-**Build Status:** **Active Discovery**
+ClawForge has established its Foundation, Constitution, Blueprint, Orientation, Integrity, and first executable State capability.
 
-ClawForge has established its Foundation, Constitution, Blueprint, Orientation, and Integrity.
+Build 0.0.6 established repository observation before interpretation, evaluation, or modification, together with the initial replaceable Python reference implementation and canonical `clawforge` command interface.
 
-Build 0.0.6 introduces ClawForge's first executable capability: observing and reporting repository State before interpretation, evaluation, or modification.
+The currently declared Known Good State remains `6f07d08` pending post-finalization verification and deliberate designation of a new Known Good State.
 
 ---
 
@@ -65,11 +65,13 @@ ClawForge is guided by several enduring commitments:
 
 # Current Direction
 
-Repository alignment has been completed.
+Build 0.0.6 — State has been completed and formally finalized.
 
-Build 0.0.6 — State is active. Its executable State capability now observes local and remote Git evidence, governed artifacts, build declarations, and Known Good State evidence without silently modifying repository contents.
+ClawForge now has its first executable capability for observing local and explicitly refreshed remote Git evidence, governed artifacts, build declarations, and declared Known Good State evidence.
 
-Current work is focused on documentation alignment and final verification before Build 0.0.6 is deliberately finalized.
+There is currently no active build.
+
+The immediate priority is post-build verification and deliberate establishment of the next Known Good State. No new build should begin until it is separately oriented, defined, and evaluated.
 
 ---
 
