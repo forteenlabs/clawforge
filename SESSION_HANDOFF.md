@@ -1,20 +1,20 @@
 # ClawForge Session Handoff
 
 Last Updated: 2026-08-08
-Current Development Checkpoint: `da573d3`
+Build 0.0.6 Finalization Commit: `80003ff`
 Declared Known Good State: `6f07d08`
 
 ---
 
 # Current Status
 
-Builds 0.0.1 through 0.0.5 are complete.
+Builds 0.0.1 through 0.0.6 are complete.
 
-Build 0.0.6 — State is active.
+There is no active build.
 
-Status: `Active Discovery`
+Status: `Build 0.0.6 Finalized`
 
-The repository was clean and synchronized with `origin/main` at checkpoint `da573d3`.
+Build 0.0.6 — State was formally finalized at commit `80003ff`, which is pushed and synchronized with `origin/main`.
 
 The complete test suite passes 43 tests.
 
@@ -24,7 +24,7 @@ The declared Known Good State remains `6f07d08`. It exists and is an ancestor of
 
 # Build 0.0.6 State
 
-Build 0.0.6 introduces ClawForge's first executable capability.
+Build 0.0.6 established ClawForge's first executable capability.
 
 State now reports:
 
@@ -71,8 +71,7 @@ ADR-0002 establishes Python as the first replaceable reference implementation, `
 - Build 0.0.3 — Blueprint
 - Build 0.0.4 — Orientation
 - Build 0.0.5 — Integrity
-
-Build 0.0.6 is not yet complete.
+- Build 0.0.6 — State
 
 ---
 
@@ -104,20 +103,22 @@ Before continuing work:
 4. Review `builds/0.0.6-state.md`.
 5. Review `ADR-0002 — Initial Reference Implementation and Command Interface`.
 6. Run the complete test suite if repository state has changed.
-7. Continue Build 0.0.6 from final documentation and verification rather than expanding State unless new evidence exposes a real implementation gap.
+7. Do not begin a new build until its scope has been separately oriented, defined, and evaluated.
 
 ---
 
 # Next Work
 
-Build 0.0.6 remains active.
+There is no active build.
 
-Next:
+The next repository work is post-finalization synchronization:
 
-1. complete final documentation alignment;
-2. perform final Build 0.0.6 verification;
-3. deliberately finalize Build 0.0.6 if verification succeeds;
-4. update authoritative build records and journal evidence;
-5. establish a new Known Good State only through governed finalization.
+1. preserve the completed Build 0.0.6 session evidence;
+2. align remaining public-facing repository state with the completed build;
+3. verify the resulting repository;
+4. establish a new Known Good State only after that resulting state has been verified;
+5. begin no new build until it is separately oriented, defined, and evaluated.
 
-Do not treat the current development checkpoint as a new Known Good State before finalization.
+The formal finalization commit `80003ff` is not automatically a new Known Good State.
+
+The currently declared Known Good State remains `6f07d08`.

@@ -38,6 +38,7 @@ Journal entries should never be silently rewritten after they have been committe
 
 ## 2026
 
+- [2026-08-08 - Build 0.0.6 State](2026/2026-08-08.md)
 - [2026-08-02 - Build 0.0.6 State](2026/2026-08-02.md)
 - [2026-08-01 - Build 0.0.6 State](2026/2026-08-01.md)
 
