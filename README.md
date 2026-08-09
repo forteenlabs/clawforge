@@ -20,13 +20,13 @@ Rather than preserving answers, ClawForge preserves the reasoning necessary for 
 
 **Latest Completed Build:** **0.0.5 — Integrity**
 
-**Repository Status:** **Known Good State**
+**Current Build:** **0.0.6 — State**
+
+**Build Status:** **Active Discovery**
 
 ClawForge has established its Foundation, Constitution, Blueprint, Orientation, and Integrity.
 
-The project now possesses an architectural identity, governing principles, an orientation process, and an integrity model for evaluating meaningful change.
-
-The next phase begins the first executable implementation of those ideas.
+Build 0.0.6 introduces ClawForge's first executable capability: observing and reporting repository State before interpretation, evaluation, or modification.
 
 ---
 
@@ -67,9 +67,9 @@ ClawForge is guided by several enduring commitments:
 
 Repository alignment has been completed.
 
-The next build will introduce ClawForge's first executable capability.
+Build 0.0.6 — State is active. Its executable State capability now observes local and remote Git evidence, governed artifacts, build declarations, and Known Good State evidence without silently modifying repository contents.
 
-The initial implementation will focus on understanding the repository before attempting to modify it, continuing the project's commitment to orientation and integrity before automation.
+Current work is focused on documentation alignment and final verification before Build 0.0.6 is deliberately finalized.
 
 ---
 
