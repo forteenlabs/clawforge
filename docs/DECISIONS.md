@@ -97,6 +97,23 @@ Defines:
 
 ---
 
+## ADR-0002 — Initial Reference Implementation and Command Interface
+
+**Status:** Accepted
+
+Defines:
+
+- Python as ClawForge's first replaceable reference implementation
+- `clawforge` as the canonical executable command
+- `cf` as an optional alias with identical behavior
+- `python -m clawforge` as a supported development invocation
+- separation of command routing, repository observation, state representation, report formatting, and Git/operating-system interaction
+- read-only State behavior with explicit remote refresh
+- independence from VS Code or another editor
+- preservation of Orientation, Integrity, and Known Good State governance boundaries
+
+---
+
 # Superseded Architecture Decisions
 
 None.
