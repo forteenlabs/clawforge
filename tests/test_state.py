@@ -4,6 +4,7 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from clawforge.artifacts import (
     ArtifactInventory,
@@ -189,6 +190,21 @@ class CollectLocalStateTests(unittest.TestCase):
                 collect_local_state(location)
 
 
+    def test_reports_git_unavailable(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            location = Path(temporary_directory)
+
+            with patch(
+                "clawforge.state.subprocess.run",
+                side_effect=FileNotFoundError,
+            ):
+                with self.assertRaisesRegex(
+                    StateError,
+                    "Git is not available on PATH",
+                ):
+                    collect_local_state(location)
+
+
 class CollectRemoteStateTests(unittest.TestCase):
     def test_does_not_refresh_without_explicit_request(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
@@ -218,6 +234,28 @@ class CollectRemoteStateTests(unittest.TestCase):
                 remote_state.status,
                 "no upstream configured",
             )
+
+    def test_reports_unavailable_when_refresh_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            local, _ = create_remote_pair(root)
+
+            missing_remote = root / "missing.git"
+            run_git(
+                local,
+                "remote",
+                "set-url",
+                "origin",
+                str(missing_remote),
+            )
+
+            local_state = collect_local_state(local)
+            remote_state = collect_remote_state(
+                local_state,
+                refresh=True,
+            )
+
+            self.assertEqual(remote_state.status, "unavailable")
 
     def test_reports_synchronized(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
