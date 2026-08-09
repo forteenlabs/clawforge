@@ -144,4 +144,6 @@ These lifecycles are established through:
 
 The executable architecture remains intentionally minimal.
 
-ClawForge has defined the governing structure required for its first reference implementation, but the implementation language, executable interfaces, Integrity Record schema, and operating commands remain subject to later architectural decisions.
+ADR-0002 establishes Python as ClawForge's first replaceable reference implementation and `clawforge` as the canonical executable command. The optional `cf` alias and `python -m clawforge` development invocation route to the same command behavior.
+
+The Integrity Record schema and future executable capabilities remain subject to later architectural decisions.
