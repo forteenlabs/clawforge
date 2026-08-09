@@ -2,7 +2,7 @@
 
 Last Updated: 2026-08-08
 Build 0.0.6 Finalization Commit: `80003ff`
-Declared Known Good State: `6f07d08`
+Declared Known Good State: `f54762b`
 
 ---
 
@@ -18,7 +18,7 @@ Build 0.0.6 — State was formally finalized at commit `80003ff`, which is pushe
 
 The complete test suite passes 43 tests.
 
-The declared Known Good State remains `6f07d08`. It exists and is an ancestor of the current development history. The current development checkpoint has not been promoted to a new Known Good State.
+The declared Known Good State is `f54762b`, the verified post-finalization repository state for Build 0.0.6.
 
 ---
 
@@ -111,14 +111,12 @@ Before continuing work:
 
 There is no active build.
 
-The next repository work is post-finalization synchronization:
+Build 0.0.6 post-finalization synchronization and verification are complete.
 
-1. preserve the completed Build 0.0.6 session evidence;
-2. align remaining public-facing repository state with the completed build;
-3. verify the resulting repository;
-4. establish a new Known Good State only after that resulting state has been verified;
-5. begin no new build until it is separately oriented, defined, and evaluated.
+Known Good State `f54762b` preserves the verified repository state following Build 0.0.6.
 
-The formal finalization commit `80003ff` is not automatically a new Known Good State.
+The next work is post-build Orientation and deliberate selection of the next architectural question.
 
-The currently declared Known Good State remains `6f07d08`.
+No new build should begin until it is separately oriented, defined, and evaluated.
+
+The Build 0.0.6 finalization commit remains `80003ff`; finalization and Known Good State designation are distinct historical checkpoints.

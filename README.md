@@ -26,7 +26,7 @@ ClawForge has established its Foundation, Constitution, Blueprint, Orientation, 
 
 Build 0.0.6 established repository observation before interpretation, evaluation, or modification, together with the initial replaceable Python reference implementation and canonical `clawforge` command interface.
 
-The currently declared Known Good State remains `6f07d08` pending post-finalization verification and deliberate designation of a new Known Good State.
+The current Known Good State is `f54762b`, designated after successful post-finalization verification of Build 0.0.6.
 
 ---
 
@@ -71,7 +71,7 @@ ClawForge now has its first executable capability for observing local and explic
 
 There is currently no active build.
 
-The immediate priority is post-build verification and deliberate establishment of the next Known Good State. No new build should begin until it is separately oriented, defined, and evaluated.
+Post-build verification and Known Good State designation are complete. The immediate priority is Orientation and deliberate selection of the next architectural question. No new build should begin until it is separately oriented, defined, and evaluated.
 
 ---
 

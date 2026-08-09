@@ -28,6 +28,6 @@ ClawForge now provides its first executable capability: State. State observes an
 
 `ADR-0002`, `ARCHITECTURE.md`, and the Build 0.0.6 record preserve the accepted initial reference implementation and command architecture.
 
-Current Known Good State: `6f07d08`
+Current Known Good State: `f54762b`
 
 The next build has not yet been defined.
